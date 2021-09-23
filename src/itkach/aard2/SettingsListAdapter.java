@@ -47,9 +47,11 @@ public class SettingsListAdapter extends BaseAdapter implements SharedPreference
     final static int POS_REMOTE_CONTENT = 1;
     final static int POS_FAV_RANDOM = 2;
     final static int POS_USE_VOLUME_FOR_NAV = 3;
-    final static int POS_USER_STYLES = 4;
-    final static int POS_CLEAR_CACHE = 5;
-    final static int POS_ABOUT = 6;
+    final static int POS_ANKI_EXPORT = 4;
+    final static int POS_USER_STYLES = 5;
+    final static int POS_CLEAR_CACHE = 6;
+    final static int POS_ABOUT = 7;
+
 
     SettingsListAdapter(Fragment fragment) {
         this.fragment = fragment;
@@ -70,7 +72,7 @@ public class SettingsListAdapter extends BaseAdapter implements SharedPreference
 
     @Override
     public int getCount() {
-        return 7;
+        return 8;
     }
 
     @Override
@@ -100,6 +102,7 @@ public class SettingsListAdapter extends BaseAdapter implements SharedPreference
             case POS_REMOTE_CONTENT: return getRemoteContentSettingsView(convertView, parent);
             case POS_FAV_RANDOM: return getFavRandomSwitchView(convertView, parent);
             case POS_USE_VOLUME_FOR_NAV: return getUseVolumeForNavView(convertView, parent);
+            case POS_ANKI_EXPORT: return getAnkiExportView(convertView, parent);
             case POS_USER_STYLES: return getUserStylesView(convertView, parent);
             case POS_CLEAR_CACHE: return getClearCacheView(convertView, parent);
             case POS_ABOUT: return getAboutView(convertView, parent);
@@ -212,6 +215,26 @@ public class SettingsListAdapter extends BaseAdapter implements SharedPreference
         toggle.setChecked(currentValue);
         return view;
     }
+
+    private View getAnkiExportView(View convertView, ViewGroup parent) {
+        View view;
+        if (convertView != null) {
+            view = convertView;
+        }
+        else {
+            LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.settings_anki_export, parent, false);
+            final CheckedTextView toggle = (CheckedTextView)view.findViewById(R.id.setting_anki_export);
+            toggle.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            toggle.toggle();
+                            }
+    });
+        }
+        return view;
+    }
+
 
     private View getUserStylesView(View convertView, final ViewGroup parent) {
         View view;
