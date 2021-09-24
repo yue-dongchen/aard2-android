@@ -80,61 +80,56 @@ public class ArticleFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int itemId = item.getItemId();
-        if (itemId == R.id.action_find_in_page) {
-            view.showFindDialog(null, true);
-            return true;
-        }
-        if (itemId == R.id.action_bookmark_article) {
-            Application app = (Application)getActivity().getApplication();
-            if (this.url != null) {
-                if (item.isChecked()) {
-                    app.removeBookmark(this.url);
-                    displayBookmarked(false);
-                } else {
-                    app.addBookmark(this.url);
-                    displayBookmarked(true);
+        switch (item.getItemId()) {
+            case R.id.action_find_in_page:
+                view.showFindDialog(null, true);
+                break;
+            case R.id.action_bookmark_article:
+                Application app = (Application)getActivity().getApplication();
+                if (this.url != null) {
+                    if (item.isChecked()) {
+                        app.removeBookmark(this.url);
+                        displayBookmarked(false);
+                    } else {
+                        app.addBookmark(this.url);
+                        displayBookmarked(true);
+                    }
                 }
-            }
-            return true;
+                break;
+            case R.id.action_fullscreen:
+                ((ArticleCollectionActivity)getActivity()).toggleFullScreen();
+                break;
+            case R.id.action_zoom_in:
+                view.textZoomIn();
+                break;
+            case R.id.action_zoom_out:
+                view.textZoomOut();
+                break;
+            case R.id.action_zoom_reset:
+                view.resetTextZoom();
+                break;
+            case R.id.action_load_remote_content:
+                view.forceLoadRemoteContent = true;
+                view.reload();
+                break;
+            case R.id.action_select_style:
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                final String[] styleTitles = view.getAvailableStyles();
+                builder.setTitle(R.string.select_style)
+                        .setItems(styleTitles, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                String title = styleTitles[which];
+                                view.saveStylePref(title);
+                                view.applyStylePref();
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        if (itemId == R.id.action_fullscreen) {
-            ((ArticleCollectionActivity)getActivity()).toggleFullScreen();
-            return true;
-        }
-        if (itemId == R.id.action_zoom_in) {
-            view.textZoomIn();
-            return true;
-        }
-        if (itemId == R.id.action_zoom_out) {
-            view.textZoomOut();
-            return true;
-        }
-        if (itemId == R.id.action_zoom_reset) {
-            view.resetTextZoom();
-            return true;
-        }
-        if (itemId == R.id.action_load_remote_content) {
-            view.forceLoadRemoteContent = true;
-            view.reload();
-            return true;
-        }
-        if (itemId == R.id.action_select_style) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            final String[] styleTitles = view.getAvailableStyles();
-            builder.setTitle(R.string.select_style)
-                    .setItems(styleTitles, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            String title = styleTitles[which];
-                            view.saveStylePref(title);
-                            view.applyStylePref();
-                        }
-                    });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     @Override
