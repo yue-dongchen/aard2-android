@@ -97,6 +97,6 @@
     <string name="action_fullscreen">Vollbild</string>
     <string name="setting_use_volume_for_nav">Lautstärketasten für die Navigation verwenden</string>
     <string name="find_hint">Suche in Seite</string>
-    <string name="setting_anki_export">Anki-Export-Option im Memü anzeigen</string>
+    <string name="setting_anki_export">Anki-Export-Option im Menü anzeigen</string>
     <string name="action_export_to_anki">Nach Anki exportieren</string>
 </resources>
