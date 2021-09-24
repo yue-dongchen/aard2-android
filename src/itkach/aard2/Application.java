@@ -74,6 +74,7 @@ public class Application extends android.app.Application {
     static final String PREF_UI_THEME_LIGHT             = "light";
     static final String PREF_UI_THEME_DARK              = "dark";
     static final String PREF_USE_VOLUME_FOR_NAV         = "useVolumeForNav";
+    static final String PREF_ANKI_EXPORT                = "ankiExport";
 
     private static final String TAG = Application.class.getSimpleName();
 
@@ -330,6 +331,18 @@ public class Application extends android.app.Application {
         final SharedPreferences prefs = prefs();
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean(Application.PREF_USE_VOLUME_FOR_NAV, value);
+        editor.commit();
+    }
+
+    boolean isAnkiExport() {
+        final SharedPreferences prefs = prefs();
+        return prefs.getBoolean(Application.PREF_ANKI_EXPORT, false);
+    }
+
+    void setAnkiExport(boolean value) {
+        final SharedPreferences prefs = prefs();
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(Application.PREF_ANKI_EXPORT, value);
         editor.commit();
     }
 

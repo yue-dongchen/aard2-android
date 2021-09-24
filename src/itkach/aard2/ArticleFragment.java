@@ -28,6 +28,7 @@ public class ArticleFragment extends Fragment {
     private ArticleWebView  view;
     private MenuItem        miBookmark;
     private MenuItem        miFullscreen;
+    private MenuItem        miAnki;
     private Drawable        icBookmark;
     private Drawable        icBookmarkO;
     private Drawable        icFullscreen;
@@ -54,10 +55,14 @@ public class ArticleFragment extends Fragment {
         inflater.inflate(R.menu.article, menu);
         miBookmark = menu.findItem(R.id.action_bookmark_article);
         miFullscreen = menu.findItem(R.id.action_fullscreen);
+        miAnki = menu.findItem(R.id.action_export_to_anki);
         if (Build.VERSION.SDK_INT < 19) {
             miFullscreen.setVisible(false);
             miFullscreen.setEnabled(false);
         }
+        Activity activity = getActivity();
+        final Application app = ((Application)activity.getApplication());
+        if (miAnki.isVisible() != app.isAnkiExport()) { miAnki.setVisible(app.isAnkiExport()); }
     }
 
     private void displayBookmarked(boolean value) {

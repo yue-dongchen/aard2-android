@@ -226,12 +226,18 @@ public class SettingsListAdapter extends BaseAdapter implements SharedPreference
             view = inflater.inflate(R.layout.settings_anki_export, parent, false);
             final CheckedTextView toggle = (CheckedTextView)view.findViewById(R.id.setting_anki_export);
             toggle.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            toggle.toggle();
-                            }
-    });
+                @Override
+                public void onClick(View v) {
+                    boolean currentValue = app.isAnkiExport();
+                    boolean newValue = !currentValue;
+                    app.setAnkiExport(newValue);
+                    toggle.setChecked(newValue);
+                }
+            });
         }
+        boolean currentValue = app.isAnkiExport();
+        CheckedTextView toggle = (CheckedTextView)view.findViewById(R.id.setting_anki_export);
+        toggle.setChecked(currentValue);
         return view;
     }
 

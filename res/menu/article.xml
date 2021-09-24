@@ -21,6 +21,11 @@
         android:showAsAction="never"
         />
 
+    <item android:id="@+id/action_export_to_anki"
+        android:title="@string/action_export_to_anki"
+        android:showAsAction="never"
+        />
+
     <item android:id="@+id/action_zoom_in"
           android:title="@string/action_zoom_in"
           android:showAsAction="never"

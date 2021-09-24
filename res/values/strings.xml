@@ -113,4 +113,5 @@
     <string name="find_next">Next</string>
     <string name="find_previous">Previous</string>
     <string name="setting_anki_export">Export to Anki from menu</string>
+    <string name="action_export_to_anki">Export to Anki</string>
 </resources>
